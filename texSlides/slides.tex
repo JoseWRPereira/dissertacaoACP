@@ -1,0 +1,127 @@
+%--------------------------------------------%
+% Template Beamer para Apresentações da UFRN %
+% by alcemygvseverino@gmail.com              %
+% Baseado em MIT Beamer Template	     %
+% versao 1.1				     %
+% Atualizado em 14/05/2016		     %
+% Modificado em 20/05/2017 		     %
+%    José W. R. Pereira - IFSP
+%--------------------------------------------%
+\documentclass[handout,t]{beamer}
+% Para alterar a linguagem do documento
+\usepackage[portuges]{babel}
+% Para aceitar caracteres especias deretamente do teclado
+\usepackage[utf8]{inputenc}
+% Para seguir as normas da ABNT de citacao e referencias
+\usepackage[alf]{abntex2cite}
+% Para incluir figuras
+\usepackage{graphicx}
+% Para melhor ajuste da posisao das figuras
+\usepackage{float}
+% Para ajustar as dimensoes do layout da pagina
+\usepackage{geometry}
+% Para formatar estrutura e informacoes de formulas matematicas
+\usepackage{amsmath}
+% Para incluir simbolos especiais em formulas matematicas
+\usepackage{amssymb}
+% Para incluir links nas referencias
+\usepackage{url}
+% Para incluir paginas de documentos .pdf externos
+\usepackage{pgfpages}
+% Para ajustar o estilo dos contadores
+\usepackage{enumerate}
+% Para modificar a cor do texto
+\usepackage{color}
+% Para incluir condicoes
+\usepackage{ifthen}
+% Para colocar legendas em algo que nao e float
+\usepackage{capt-of}
+% Para utilizar biblioteca de construcao de figuras
+\usepackage{tikz}
+% Para utilizar duas figuras lado a lado
+\usepackage{subfig}
+% Para utilizar biblioteca de simbolos matemáticos (Laplace)
+\usepackage{mathrsfs}
+% Para utilizar a cor e as colunas em uma tabela
+\usepackage{colortbl}
+\usepackage{multirow}
+
+
+% Para definir o tema do slide
+\usetheme{Berlin}
+% Para difinir cores e background
+\usecolortheme{ufrn}
+% Para numerar as figuras
+\setbeamertemplate{caption}[numbered]
+
+% Título
+\title[]{
+Controle de Sistema Dinâmico Utilizando Lógica Paraconsistente Anotada Evidencial $E\tau$(LPA$E\tau$)}
+% Data
+\date{01 de Agosto de 2018}
+% Autores
+\author[José W. R. Pereira]
+{
+	José William Rodrigues Pereira\inst{1}\\
+	\vspace{0.25cm}
+	Orientador: Profº Dr. Tarcisio Fernandes Leão\inst{2}
+}
+% Instituto
+\institute[INSTITUTO]
+{
+	\inst{1}%
+	\url{josewrpereira@gmail.com}\\
+	\vspace{0.25cm}
+	\inst{2}%
+	\url{leao@ifsp.edu.br}
+\
+}
+% Logo do canto inferior direito
+\pgfdeclareimage[height=0.7cm]{logo_IFSP}{./imagens/logo_IFSP}
+\logo{
+	\vspace*{-0.25cm}
+	\pgfuseimage{logo_IFSP}
+	\hspace*{-0.05cm}}
+
+
+\begin{document}
+% Sumário
+\frame{\titlepage}
+\section[]{}
+\begin{frame}{Sumário}
+	\tableofcontents
+\end{frame}
+
+% Introducao
+\include{./texSlides/introducao}
+
+% Desenvolvimento
+\include{./texSlides/desenvolvimento}
+
+% Metodologia
+\include{./texSlides/metodologia}
+
+% Resultados
+\include{./texSlides/resultados}
+
+% Conclusao
+\include{./texSlides/conclusao}
+
+% Referencias
+\include{./texSlides/referencias}
+
+% Agradecimentos
+\section{}
+  \begin{frame}{Agradecimentos}
+    \begin{figure}[!htb]
+      \center\includegraphics[scale=0.6]{./imagens/logo_IFSP.jpg}
+    \end{figure}
+
+    \centering
+
+    \vspace{1cm}
+    Agradeço a todos!
+	
+  \end{frame}
+
+\end{document}

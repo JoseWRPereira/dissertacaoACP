@@ -1,0 +1,320 @@
+%\section*{ Obtenção de um modelo do processo }
+Para melhor compreensão dos modelos dinâmicos dos sistemas, é utilizado o Diagrama de blocos do comportamento do sistema em malha aberta, conforme Figura \ref{fig:AnexoBmalhaAberta}\cite{Ogata}.
+
+
+%\begin{comment}
+
+
+\begin{figure}[!htb]
+\centering
+\caption{ Diagrama de blocos de sistema de controle em malha aberta}
+\begin{tikzpicture}[scale=0.85]
+%\draw [lightgray](0,0) grid (15,2);
+\draw (0,1) -- (3,1);
+\draw [black, thick](3,0) rectangle (6, 2) ; 
+\draw (6,1) -- (9,1);
+\draw [black, thick](9,0) rectangle (12, 2) ; 
+\draw (12,1) -- (15,1);
+
+\draw [fill]( 3,1) -- ( 2.8, 1.1) -- ( 2.8,0.9) -- ( 3,1);
+\draw [fill]( 9,1) -- ( 8.8, 1.1) -- ( 8.8,0.9) -- ( 9,1);
+\draw [fill](15,1) -- (14.8, 1.1) -- (14.8,0.9) -- (15,1);
+
+\node at ( 4.5, 1){Controlador};
+\node at (10.5, 1){Planta};
+\node [above] at ( 1.5,1){Valor de};
+\node [below] at ( 1.5,1){Referência};
+\node [above] at ( 7.5,1){Variável};
+\node [below] at ( 7.5,1){Manipulada};
+\node [above] at (13.5,1){Variável};
+\node [below] at (13.5,1){Controlada};
+\end{tikzpicture}
+\label{fig:AnexoBmalhaAberta}
+
+{\small Fonte: \cite{Ogata}}
+\end{figure}
+
+%\end{comment}
+
+Utilizando variáveis para cada elemento do Diagrama de blocos,
+conforme Figura \ref{fig:AnexoBAcaoMalhaAberta},
+de forma a representá-los nas equações, temos então que:
+
+
+
+\begin{figure}[!htb]
+\centering
+\caption{ Sistema de controle em malha aberta}
+\begin{tikzpicture}[scale=0.85]
+%\draw [lightgray](0,0) grid (15,2);
+\draw (0,1) -- (3,1);
+\draw [black, thick](3,0) rectangle (6, 2) ; 
+\draw (6,1) -- (9,1);
+\draw [black, thick](9,0) rectangle (12, 2) ; 
+\draw (12,1) -- (15,1);
+
+\draw [fill]( 3,1) -- ( 2.8, 1.1) -- ( 2.8,0.9) -- ( 3,1);
+\draw [fill]( 9,1) -- ( 8.8, 1.1) -- ( 8.8,0.9) -- ( 9,1);
+\draw [fill](15,1) -- (14.8, 1.1) -- (14.8,0.9) -- (15,1);
+
+\node at ( 4.5, 1.4){Controlador};
+\node at ( 4.5, 0.6){f(t)};
+\node at (10.5, 1.4){Planta};
+\node at (10.5, 0.6){g(t)};
+\node [above] at ( 1.5,1){r(t)};
+\node [above] at ( 7.5,1){u(t)};
+\node [above] at (13.5,1){c(t)};
+\end{tikzpicture}
+\label{fig:AnexoBAcaoMalhaAberta}
+
+{\small Fonte: Próprio autor}
+\end{figure}
+
+
+Onde: 
+
+%\begin{itemize}
+%\item 
+\hspace{1cm} $r(t)$: Valor de Referência em rotações por segundo [rps];
+
+%\item 
+$\hspace{1cm} f(t)$: Controlador que converte rps em \% PWM para acionar o motor;
+
+%\item 
+$\hspace{1cm} u(t)$: Variável Manipulada é o valor percentual do PWM;
+
+%\item 
+$\hspace{1cm} g(t)$: Planta ou Processo formado pelo motor DC com o disco acoplado no eixo;
+
+%\item 
+$\hspace{1cm}  c(t)$: Variável Controlada é a velocidade de rotação do eixo em rps.
+
+%\end{itemize}
+
+
+
+O sistema físico aqui estudado possui comportamento exponencial que pode ser descrito pela equação \ref{eq:ftSistOrdem1}. 
+
+
+
+
+
+
+\begin{equation}
+	 \frac{d c(t)}{dt} + c(t) = r(t) \rightarrow  \mathscr{L} \to \frac{C(s)}{R(s)} = \frac{K}{s + a} 
+\label{eq:ftSistOrdem1}
+\end{equation}
+
+Onde:
+
+\setlength{\parindent}{2cm}
+
+$t$ : tempo,$ r(t) = 0$ , para t $<$ 0;
+
+$\mathscr{L}$ : Operador de Laplace;
+
+$c(t)$ : Variável controlada no domínio do tempo;
+
+$C(s)$ : Variável controlada no domínio da frequência;
+
+$r(t)$ : Valor de referência (\emph{setpoint}) no domínio do tempo;
+
+$R(s)$ : Valor de referência (\emph{setpoint}) no domínio da frequência.
+
+$K$ : Constante de proporcionalidade;
+
+$s$ : Variável complexa de Laplace;
+
+$a$ : Polo da função.
+\setlength{\parindent}{1cm}
+
+
+
+Sendo assim, para um estímulo de entrada do tipo \textbf{degrau}, com amplitude \textbf{A}, temos $ R(s) = \frac{A}{s}$ e aplicando a Transformada Inversa de Laplace:
+
+\begin{equation}
+C(s) = \frac{K}{s+a} \frac{A}{s} \rightarrow \mathscr{L}^{-1} \to c(t) = \frac{K A}{a} (1 - e^{-at})
+\label{eq:degrauA}
+\end{equation}
+
+A Figura \ref{fig:AnexoBacaoMalhaAberTau} mostra um sinal do tipo degrau com amplitude \textbf{A} aplicado ao sistema de teste, que responde conforme um sistema de primeira ordem como mostrado na Figura \ref{fig:AnexoBcRegime}. 
+
+
+%A partir de um determinado instante de tempo, entra em regime constante ($c_{reg}$), alcançando o valor de referência dado pelo degrau de amplitude A. Assim quando $ t \rightarrow \infty $  então $ c_{reg} \rightarrow A $:
+
+
+
+
+\begin{figure}[!htb]
+\centering
+\caption{Sistema de Primeira Ordem}
+\subfloat[Sinal de entrada tipo degrau com amplitude A]{\label{fig:AnexoBdegrauA}
+\begin{tikzpicture}[scale=0.75]
+\draw [lightgray, dashed](0,0) grid (8.8,5.8);
+\draw [->] (0,0) -- (9,0);
+\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
+\draw [->] (0,0) -- (0,6);
+\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
+\node at (9.0,-0.5) {$t$};
+\node at (0.2,6.5) {$r(t)$};
+\draw [red, ultra thick] (0.0,5.0) -- (9.0,5.0);
+\draw [red, ultra thick] (0.0,0.0) -- (0.0,5.0);
+\node at (-0.5,5.0)[red]{$A$};
+\end{tikzpicture} }
+\subfloat[Resposta transitória e regime de acomodação]{\label{fig:AnexoBcRegime}
+\begin{tikzpicture}[scale=0.75]
+\draw [lightgray, dashed](0,0) grid (8.8,5.8);
+\draw [->] (0,0) -- (9,0);
+\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
+\draw [->] (0,0) -- (0,6);
+\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
+\node at (9.0,-0.5) {$t$};
+\node at (0.2,6.5) {$c(t)$};
+\node at (-0.5,5.0)[blue]{$C_{reg}$};
+\draw [blue, ultra thick] (0,0) to [out=85, in=180] (6,5);
+\draw [blue, ultra thick] (6,5) -- (9,5);
+\end{tikzpicture}}
+\label{fig:AnexoBsistPrimeiraOrdem}
+
+{\small Fonte: Próprio autor}
+\end{figure}
+
+%\begin{equation}
+%c_{reg} = \lim_{t \rightarrow \infty} \frac{KA}{a}(1-e^{-at}) = \frac{KA}{a}
+%\label{eq:cregime}
+%\end{equation}
+
+
+
+%Aplicando o Teorema do Valor Final pode-se ver que o \emph{$c_{reg}$} estabiliza em um valor constante como mostrado pela Equação \ref{eq:teoremaValorFinal}:
+
+%\begin{equation}
+%C_{reg} = \lim_{s \rightarrow 0} sC(s) = \lim_{s \rightarrow 0} s\ \frac{K}{s+a}\frac{A}{s} = \frac{KA}{a}
+%\label{eq:teoremaValorFinal}
+%\end{equation}
+
+
+
+Matematicamente, quanto maior o valor de \emph{t} na Equação \ref{eq:degrauA}, o resultado da exponenencial tende a zero, levando a um resultado que depende apenas das constantes para o valor de referência. 
+
+Tomando $t= \frac{1}{a} = a^{-1} = \tau$ para gerar um valor conhecido em $e^{-at}$, da Equação \ref{eq:degrauA} temos:
+
+
+\begin{equation}
+c(a^-1) = \frac{KA}{a}(1-e^{-(a.a^{-1})}) = \frac{KA}{a}(1-e^{-1}) = \frac{KA}{a}.0,63 = 0,63 . C_{reg}
+\end{equation}
+
+A Figura \ref{fig:AnexoBconstTempo} mostra a constante de tempo $\tau$, que é atingida quando o sistema alcança 63\% do seu valor de regime. Como sabemos que $\tau = \frac{1}{a}$, então o polo do sistema, que leva o denominador da Equação \ref{eq:degrauA} a zero, é:
+
+\begin{equation}
+a = \frac{1}{\tau}
+\end{equation}
+
+
+
+\begin{figure}
+\centering
+\caption{Constante de tempo}
+\begin{tikzpicture}[scale=1.0]
+\draw [lightgray, dashed](0,0) grid (8.8,5.8);
+
+\draw [->] (0,0) -- (9,0);
+\draw [fill] (0,6.2) -- (-0.1, 5.8) -- (0.1,5.8) -- (0,6.2);
+\draw [->] (0,0) -- (0,6);
+\draw [fill] (9.2,0) -- (8.8,0.1) -- (8.8,-0.1)--(9.2,0.0);
+
+\node at (9.0,-0.5) {$t$};
+\node at (0.2,6.5) {$c(t)$};
+
+\node at (-0.5,5.0)[blue]{$C_{reg}$};
+\node at (-1,5.0*0.63)[purple]{$0,63.c_{reg}$};
+\draw [purple, ultra thick, dashed] (0.0,5.0*0.63) -- (1.45,5.0*0.63)
+						   -- (1.45,0.0);
+\draw [blue, ultra thick] (0,0) to [out=85, in=180] (6,5);
+\draw [blue, ultra thick] (6,5) -- (9,5);
+
+\draw [<->] (0.0,-0.4) -- (1.45,-0.4); 
+\node at (1.45/2,-0.7){$\tau$};
+
+\end{tikzpicture}
+\label{fig:AnexoBconstTempo}
+
+{\small Fonte: Próprio autor}
+\end{figure}
+
+Portanto:
+
+\begin{equation}
+K = \frac{ac_{reg}}{A}
+\label{eq:calcK}
+\end{equation}
+
+%\begin{tikzpicture}
+%\begin{axis}
+%\addplot[title=Gráfico de uma função, 
+%	xlabel = {$x$}, ylabel={$y$},
+% 	red!70!blue, very thick, samples=200,
+%	domain=-3:3]{x/(x^4-3*x^2+4)};
+%\end{axis}
+%\end{tikzpicture}
+
+
+
+%\begin{figure}[!htb]
+%\center	
+%\includegraphics[scale=1.2]{./imagens/ftMalhaAberta.eps} 
+%\label{fig:ftMalhaAberta} 
+%\caption{ Função de Transferência empírica da planta}
+%\end{figure}
+
+
+
+
+
+A Figura \ref{fig:AnexoBacaoMalhaAberTau} mostra um sinal do tipo
+degrau aplicado como referência no valor de \emph{25 rps}, a curva de
+comportamento real medida empiricamente e a curva aproximada calculada
+pelo método determinístico como segue, e ainda possui uma linha
+indicativa que mostra o ponto de intercepção da curva ao valor de 63\%
+do valor de referência, e foi gerado um gráfico com
+divisões no eixo do Tempo no valor de $\tau = 2,5s $.
+
+\begin{figure}[!htb]
+\caption{Ação de Controle em Malha Aberta}
+\center\includegraphics[scale=1.4]{./plot/acaoMalhaAbertaTau.eps}
+\label{fig:AnexoBacaoMalhaAberTau}
+
+{\small Fonte: Próprio autor}
+\end{figure}
+
+
+Calculando o polo da função:
+\begin{equation}
+  a = \frac{1}{\tau} = \frac{1}{2,5} = 0,4
+\end{equation}
+
+Como $c_{reg} = 25$ e $A$ também é $25$ então na Equação \ref{eq:calcK} $K = a$ e assim temos que:
+
+\begin{equation}
+c(t) = \frac{KA}{a}(1-e^{-at}) = \frac{0,4.25}{0,4}(1-e^{-0,4.t}) = 25(1-e^{-0.4.t})
+\end{equation}
+
+
+Aplicando a Transformada de Laplace:
+
+\begin{equation}
+  \frac{C(s)}{R(s)} = \frac{K}{s+a} = \frac{0,4}{s+0,4}
+\end{equation}
+
+
+Para a equação no formato canônico tanto o numerador quanto o denominador são divididos pelo próprio valor de $K$. Assim temos que:
+
+\begin{equation}
+  \frac{C(s)}{R(s)} = \frac{1}{\tau s+1} = \frac{1}{2,5 s+1}
+\end{equation}
+
+
+Baseado no gráfico mostrado na Figura \ref{fig:AnexoBacaoMalhaAberTau}, o valor de tempo em que o motor assume a velocidade de referência é aproximadamente $5\tau$, 12,5 s, e como objetivo para uma primeira versão da implementação do controle utilizando LPA$E\tau$ é proposto que o sistema reduza o tempo de alcance da velocidade alvo em um tempo de no máximo $1\tau$, ou seja, $2,5 s$.
+
+
+

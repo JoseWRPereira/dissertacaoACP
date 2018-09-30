@@ -1,0 +1,185 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage[brazilian]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage[small,bf]{caption}
+\usepackage{amsmath, amssymb, pxfonts}
+\usepackage{textcomp}
+\usepackage{nomencl}
+\makenomenclature
+\usepackage{longtable}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\everymath{\displaystyle}
+\usepackage[alf]{abntex2cite}
+\usepackage{url}
+\usepackage{emptypage}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{nopageno}
+\usepackage{indentfirst}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{subfig}
+\usepackage{verbatim}
+\usepackage{multirow}
+%\usepackage[makeindex,split]{splitidx}
+
+\input{./texDissertacao/macros}
+
+
+
+
+%%%----------------------------------- Declarações
+\autor{JOSÉ WILLIAM RODRIGUES PEREIRA}
+\nome{José William Rodrigues }
+\ultimonome{Pereira}
+\titulo{ CONTROLE DE SISTEMA DINÂMICO UTILIZANDO LÓGICA PARACONSISTENTE ANOTADA EVIDENCIAL $E\tau$ 
+}
+\subtitulo{ }
+\curso{Automação e Controle de Processos }
+\instituicao{Instituto Federal de Educação, Ciência e Tecnologia de São Paulo }
+\sigla{IFSP}
+\unidadeacademica{Pós-Graduação Stricto Sensu }
+\grau{Mestre }
+\tipodotrabalho{Dissertação } 
+\orientador{Tarcisio Fernandes Leão }
+\torientador{Profº Dr. }
+\coorientador{ }
+\tcoorientador{  }
+\cidade{São Paulo}
+\ano{2018}
+\npaginas{\pageref{LastPage}}
+\CDU{003.3}
+\areas{	1.Técnicas de Controle 
+	2.Lógica Paraconsistente
+	3.Controle Não-Convencional}
+\examinadorum{ Eduardo Alves da Costa}
+\texaminadorum{Profº Dr.}
+\examinadordois{Cláudio Rodrigo Torres}
+\texaminadordois{Profº Dr. }
+\data{01/08/2018 }
+\palavraschave{Controle Não Convencional; Lógica Paraconsistente; Técnicas de Controle }
+\keywords{ Unconventional control; Paraconsistent logic; Control Techniques; }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Inicio do documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\configuramargens
+
+
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{12pt}
+
+
+
+\begin{document}
+\capa
+
+\folhaderosto
+\fichacatalografica
+\folhadeaprovacao
+
+\dedicatoria{\input{./texDissertacao/dedicatoria}}
+\agradecimentos{\input{./texDissertacao/agradecimentos}}
+\epigrafe{\input{./texDissertacao/epigrafe}}
+\resumo{\input{./texDissertacao/resumo}}
+\resumolinguaestrangeira{\input{./texDissertacao/abstract}}
+\listadefiguras
+\listadetabelas
+\listadeabreviaturasesiglas
+
+\chapter*{Lista de símbolos}
+\input{./texDissertacao/simbolos}
+
+
+
+\sumario
+
+%\singlespacing 	% espaçamento simples
+\onehalfspacing		% espaçamento de 1,5
+%\doublespacing		% espaçamento duplo
+
+\pagestyle{myheadings}
+%\pagestyle{fancy}
+
+%\fancyhf{}
+%\lhead{\pageref{LastPage}}
+%\rhead{\thepage}
+
+\setcounter{page}{16}
+\chapter[Introdução]{1. Introdução}
+\input{./texDissertacao/cap1-objetivo}
+
+\chapter[RevisãoBibliográfica]{2. Revisão Bibliográfica}
+\input{./texDissertacao/cap2-revBib}
+
+\chapter[Desenvolvimento]{3. Desenvolvimento}
+\input{./texDissertacao/cap3-desen}
+
+\chapter[Materiais e Métodos]{4. Materiais e Métodos}
+\input{./texDissertacao/cap4-metodologia}
+
+\chapter[Resultados]{5. Resultados}
+\input{./texDissertacao/cap5-resultados}
+
+\chapter[Conclusão]{6. Conclusão}
+\input{./texDissertacao/cap6-conclusao}
+
+
+
+
+
+%%-------------------------------------- Bibliografia
+\bibliographystyle{abnt-alf}
+\bibliography{./bib/bibliografia}
+
+
+
+
+%%-------------------------------------- Apendice
+%%-------------------------------------- Anexo
+\appendix
+
+\chapter[Apêndice A - Controle clássico de sistemas]{Apêndice A - Controle clássico de sistemas}
+\newpage
+\input{./texDissertacao/anexoA}
+
+\chapter[Apêndice B - Modelo matemático do processo]{Apêndice B - Modelo matemático do processo}
+\newpage
+\input{./texDissertacao/anexoB}
+
+
+\end{document}
+
+
+
+
+
+% bibliographystyle tipos
+%http://www.cs.stir.ac.uk/~kjt/software/latex/showbst.html
+
+%%%% Estrutura base do arquivo
+%%[] http://www.demat.ufma.br/monografia.php <acesso em 12/10/2015>
+%%%% Inclusão de pacote de acentuação Francês/Portugues
+%%[] https://www.overleaf.com/help/61-how-do-i-do-to-use-letters-with-accents-e-dot-g-in-french-or-portuguese#.Vhwirc8Tr18 <acesso em 12/10/2015 
+
+
+%http://link.periodicos.capes.gov.br/sfxlcl41?frbrVersion=2&ctx_ver=Z39.88-2004&ctx_enc=info:ofi/enc:UTF-8&ctx_tim=2015-10-27T23%3A55%3A45IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi/fmt:kev:mtx:ctx&rfr_id=info:sid/primo.exlibrisgroup.com:primo3-Article-doaj&rft_val_fmt=info:ofi/fmt:kev:mtx:journal&rft.genre=article&rft.atitle=Implementation+of+PID+and+Fuzzy+PID+controllers+for+Temperature+control+in+CSTR&rft.jtitle=International+Journal+of+Advanced+Research+in+Computer+Science&rft.btitle=&rft.aulast=&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=S.+Srinivasulu+Raju&rft.aucorp=&rft.date=20130501&rft.volume=04&rft.issue=05&rft.part=&rft.quarter=&rft.ssn=&rft.spage=12&rft.epage=&rft.pages=&rft.artnum=&rft.issn=0976-5697&rft.eissn=&rft.isbn=&rft.sici=&rft.coden=&rft_id=info:doi/&rft.object_id=&svc_val_fmt=info:ofi/fmt:kev:mtx:sch_svc&rft.eisbn=&rft_dat=%3Cdoaj%3E01c00f89709d40549e219bbc941a6a0a%3C/doaj%3E%3Cgrp_id%3E7778711627802309381%3C/grp_id%3E%3Coa%3E%3C/oa%3E&rft_id=info:oai/&svc.fulltext=yes&req.language=por
+
+% http://link.periodicos.capes.gov.br/sfxlcl41?frbrVersion=3&ctx_ver=Z39.88-2004&ctx_enc=info:ofi/enc:UTF-8&ctx_tim=2015-10-27T23%3A55%3A45IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi/fmt:kev:mtx:ctx&rfr_id=info:sid/primo.exlibrisgroup.com:primo3-Article-springer_jour&rft_val_fmt=info:ofi/fmt:kev:mtx:&rft.genre=&rft.atitle=Adaptive+fuzzy+tuning+of+PID+controllers&rft.jtitle=Neural+Computing+and+Applications&rft.btitle=&rft.aulast=Esfandyari&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Esfandyari%2C+Morteza&rft.aucorp=&rft.date=201312&rft.volume=23&rft.issue=1&rft.part=&rft.quarter=&rft.ssn=&rft.spage=19&rft.epage=28&rft.pages=&rft.artnum=&rft.issn=0941-0643&rft.eissn=1433-3058&rft.isbn=&rft.sici=&rft.coden=&rft_id=info:doi/10.1007%2Fs00521-012-1215-8&rft.object_id=&svc_val_fmt=info:ofi/fmt:kev:mtx:sch_svc&rft.eisbn=&rft_dat=%3Cspringer_jour%3E10.1007%2Fs00521-012-1215-8%3C/springer_jour%3E%3Cgrp_id%3E6653138538760267648%3C/grp_id%3E%3Coa%3E%3C/oa%3E&rft_id=info:oai/&svc.fulltext=yes&req.language=por
+
+%http://link.periodicos.capes.gov.br/sfxlcl41?frbrVersion=2&ctx_ver=Z39.88-2004&ctx_enc=info:ofi/enc:UTF-8&ctx_tim=2015-10-27T23%3A55%3A45IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi/fmt:kev:mtx:ctx&rfr_id=info:sid/primo.exlibrisgroup.com:primo3-Article-sciversesciencedirect_elsevier&rft_val_fmt=info:ofi/fmt:kev:mtx:&rft.genre=article&rft.atitle=A+multivariable+predictive+fuzzy+PID+control+system&rft.jtitle=Applied+Soft+Computing+Journal&rft.btitle=&rft.aulast=Savran&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Savran%2C+Aydogan&rft.aucorp=&rft.date=2012&rft.volume=&rft.issue=&rft.part=&rft.quarter=&rft.ssn=&rft.spage=&rft.epage=&rft.pages=&rft.artnum=&rft.issn=1568-4946&rft.eissn=&rft.isbn=&rft.sici=&rft.coden=&rft_id=info:doi/10.1016%2Fj.asoc.2012.11.021&rft.object_id=&svc_val_fmt=info:ofi/fmt:kev:mtx:sch_svc&rft.eisbn=&rft_dat=%3Csciversesciencedirect_elsevier%3ES1568-4946%2812%2900505-4%3C/sciversesciencedirect_elsevier%3E%3Cgrp_id%3E824269217450252803%3C/grp_id%3E%3Coa%3E%3C/oa%3E&rft_id=info:oai/&svc.fulltext=yes&req.language=por
+
+%http://link.periodicos.capes.gov.br/sfxlcl41?frbrVersion=3&ctx_ver=Z39.88-2004&ctx_enc=info:ofi/enc:UTF-8&ctx_tim=2015-10-27T23%3A55%3A45IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi/fmt:kev:mtx:ctx&rfr_id=info:sid/primo.exlibrisgroup.com:primo3-Article-gale_ofa&rft_val_fmt=info:ofi/fmt:kev:mtx:&rft.genre=article&rft.atitle=A+multivariable+predictive+fuzzy+PID+control+system.&rft.jtitle=Applied+Soft+Computing+Journal&rft.btitle=&rft.aulast=&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Savran%2C+Aydogan&rft.aucorp=&rft.date=20130501&rft.volume=13&rft.issue=5&rft.part=&rft.quarter=&rft.ssn=&rft.spage=2658&rft.epage=&rft.pages=&rft.artnum=&rft.issn=1568-4946&rft.eissn=&rft.isbn=&rft.sici=&rft.coden=&rft_id=info:doi/&rft.object_id=&svc_val_fmt=info:ofi/fmt:kev:mtx:sch_svc&rft.eisbn=&rft_dat=%3Cgale_ofa%3E339267889%3C/gale_ofa%3E%3Cgrp_id%3E8626435848081561867%3C/grp_id%3E%3Coa%3E%3C/oa%3E&rft_id=info:oai/&svc.fulltext=yes&req.language=por
+
+%http://link.periodicos.capes.gov.br/sfxlcl41?frbrVersion=4&ctx_ver=Z39.88-2004&ctx_enc=info:ofi/enc:UTF-8&ctx_tim=2015-10-27T23%3A57%3A23IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi/fmt:kev:mtx:ctx&rfr_id=info:sid/primo.exlibrisgroup.com:primo3-Article-springer_jour&rft_val_fmt=info:ofi/fmt:kev:mtx:&rft.genre=article&rft.atitle=Neuro+PID+control+of+power+generation+using+a+low+temperature+gap&rft.jtitle=Artificial+Life+and+Robotics&rft.btitle=&rft.aulast=Han&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Han%2C+Kun-Young&rft.aucorp=&rft.date=201109&rft.volume=16&rft.issue=2&rft.part=&rft.quarter=&rft.ssn=&rft.spage=178&rft.epage=184&rft.pages=&rft.artnum=&rft.issn=1433-5298&rft.eissn=1614-7456&rft.isbn=&rft.sici=&rft.coden=&rft_id=info:doi/10.1007%2Fs10015-011-0913-0&rft.object_id=&svc_val_fmt=info:ofi/fmt:kev:mtx:sch_svc&rft.eisbn=&rft_dat=%3Cspringer_jour%3E10.1007%2Fs10015-011-0913-0%3C/springer_jour%3E%3Cgrp_id%3E5844933895106062701%3C/grp_id%3E%3Coa%3E%3C/oa%3E&rft_id=info:oai/&svc.fulltext=yes&req.language=por
+
+
+
