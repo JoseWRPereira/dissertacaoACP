@@ -1557,7 +1557,7 @@ para um valor de referência de 25\% do valor máximo.
 
 
 
-
+\newpage
 \subsubsection{O fator de correção $\delta$}
 
 O fator de correção $\delta$ tem a finalidade de corrigir a variável
@@ -1565,16 +1565,161 @@ manipulada de modo a zerar a diferença entre a variável controlada e a
 variável de referência. A correção aqui empregada é de ajuste fino da
 variável manipulada.
 
-A correção se dá por um algorítmo que faz a leitura de forma cíclica
-do grau de incerteza e atualiza o $\delta$ correspondente ao patamar
-em execução.
+A correção se dá por um algorítmo que implementa um filtro de média móvel
+tendo como elemento de cálculo o Grau de Incerteza,
+como mostra a Figura \ref{fig:diagramaBlocosLPAEtDelta}.
 
-A dificuldade aqui encontrada é no fato de que a atualização do
-$\delta$ somente pode ocorrer após a estabilização do sinal no patamar
-após a mudança de velocidade, seja em um primeiro momento de
-acionamento com a velocidade saído do zero para um valor desejado de
-referência, como entre valores desejados diferentes de zero e
-diferentes entre si. 
+
+
+\begin{figure}[!h]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%fg
+\centering
+\caption{Diagrama de blocos do controle com cálculo do Delta}
+\begin{tikzpicture}[scale=1.0]
+\tikzset{ >=latex, inner sep=0pt, outer sep=0pt,  }
+
+%\draw [lightgray, dashed](0,0) grid (15,4.2);
+
+%%% Blocos 
+
+% Kn normalização rps -> 0..1
+\node [fill=black, circle] (KSP0) at (1.0,4.0) { };
+\node [fill=black, circle] (KSP1) at (2.0,3.0) { };
+\draw[thick] (KSP0) rectangle (KSP1);
+\fill[white, nearly transparent] (KSP0) rectangle (KSP1);
+\node [fill=black, circle] (KSPin)  at (1.0,3.5) { }; 
+\node [fill=black, circle] (KSPout) at (2.0,3.5) { }; 
+\node (Kn1) at (1.5,3.5) {$K_n$};
+
+% Kn Sensor
+\node [fill=black, circle] (KS0) at (1.0,2.0) { };
+\node [fill=black, circle] (KS1) at (2.0,1.0) { };
+\draw[thick] (KS0) rectangle (KS1);
+\fill[white, nearly transparent] (KS0) rectangle (KS1);
+\node [fill=black, circle] (KSin)  at (1.0,1.5) { };
+\node [fill=black, circle] (KSout) at (2.0,1.5) { };
+\node (Kn2) at (1.5,1.5) {$K_n$};
+
+% LPAEt
+\node [fill=black, circle] (LPA0) at (3,4.0) { };
+\node [fill=black, circle] (LPA1) at (6,1.0) { };
+\draw[thick] (LPA0) rectangle (LPA1);
+\fill[white, nearly transparent] (LPA0) rectangle (LPA1);
+\draw [thick] (4.5,4.0) -- (6.0,2.5) -- (4.5,1.0) -- (3.0,2.5) -- (4.5,4.0);
+\node (LPA2v) at (4.5,2.5) {$LPAE\tau$};
+\node [fill=black, circle] (LPAu0)  at (3.0,3.5) { };
+\node [fill=black, circle] (LPAu1)  at (3.0,1.5) { };
+\node [fill=black, circle] (LPAgc)  at (6.0,3.5) { };
+\node [fill=black, circle] (LPAs)   at (6.0,2.5) { };
+\node [fill=black, circle] (LPAgct) at (6.0,1.5) { };
+\node (LPA2vu0)  at (2.4,3.7) {$\mu _0$};
+\node (LPA2vu1)  at (2.4,1.7) {$\mu _1$};
+
+% Kn u(t)
+\node [fill=black, circle] (KU0) at (10.0,3.0) { };
+\node [fill=black, circle] (KU1) at (11.0,2.0) { };
+\draw[thick] (KU0) rectangle (KU1);
+\fill[white, nearly transparent] (KU0) rectangle (KU1);
+\node [fill=black, circle] (KUin)  at (10.0,2.5) { };
+\node [fill=black, circle] (KUout) at (11.0,2.5) { };
+\node (Ku2) at (10.5,2.5) {$K_u$};
+
+
+% Planta
+\node [fill=black, circle] (GT0) at (12,4.0) { };
+\node [fill=black, circle] (GT1) at (14,1.0) { };
+\draw[thick] (GT0) rectangle (GT1);
+\fill[white, nearly transparent] (GT0) rectangle (GT1);
+\node [fill=black, circle] (GTin)  at (12.0,2.5) { };
+\node [fill=black, circle] (GTout) at (14.0,2.5) { };
+\node (planta) at (13.0,2.5) {$g(t)$};
+
+
+
+%%% Linhas 
+
+% set point
+\draw [->, thick] (0.0,3.5) -- (KSPin);
+\node (rt) at (0.5,3.8) {$r(t)$};
+
+% GT -> fim
+\draw [->, thick] (GTout) -- (15,2.5);
+\node (ct) at (14.5,2.8) {$c(t)$};
+\node (ct) at (0.5,1.8) {$c(t)$};
+
+% normalização 0..1 -> LPA2v u0
+\draw [->, thick] (KSPout) -- (LPAu0);
+
+% normalização 0..1 -> LPA2v u1
+\draw [->, thick] (KSout) -- (LPAu1);
+
+% LPAEt -> Ku
+\draw [->, thick] (LPAs) -- (8.2,2.5);
+\draw [->, thick] (8.8,2.5) -- (KUin);
+\node (ut) at (9.5,2.8) {$\mu_{ER}\delta$};
+\node (ut) at (7.0,2.8) {$\mu_{ER}\delta_{alvo}$};
+
+% Ku -> GT
+\draw [->, thick] (KUout) -- (GTin);
+\node (ut) at (11.5,2.8) {$u(t)$};
+
+% GT -> Kn Sensor
+\draw [->, thick] (GTout) -- (14.5,2.5) -- (14.5,0.0) -- (0.5,0.0) -- (0.5,1.5) -- (KSin);
+
+
+\draw [semithick, black] (8.5,2.5) circle (0.3);
+\node at (8.1,2.8){+};
+\node at (8.7,2.9){+};
+\draw[thick] (7.5,4.5) rectangle (9.5,3.5);
+\draw [->, thick] (8.5,3.5) -- (8.5,2.8);
+\draw [->, thick] (6.0,3.7) -- (7.5,3.7);
+\node at (6.8,4.0){$G_{in}$};
+\node at (8.8,3.3){$\delta$};
+\node at (8.5,4.2){Média};
+\node at (8.5,3.8){Móvel};
+
+
+
+\end{tikzpicture}
+\label{fig:diagramaBlocosLPAEtDelta}
+
+{\vspace{0.2cm} \small Fonte: Próprio autor}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+Sendo assim, o controlador possui um valor de acionamento alvo,
+que depende do valor de referência associada a distribuição
+da Tabela \ref{tab:correcaoDelta},
+mas que apesar disso, ainda pode apresentar um erro,
+que é captado no filtro de média móvel com o grau de incerteza,
+pois esse parâmetro equivale ao erro em um sistema clássico,
+e que utilizando a $LPAE\tau$ foi denominado Delta ($\delta$).
+
+Este valor é atualizado a cada ciclo de leitura da planta,
+e a quantidade de elementos do filtro vai depender da aplicação e
+do quão rápido se quer zerar o grau de incerteza.
+
+Comparativamente, pode-se considerar uma equivalência com uma
+integral do erro, no sistema clássico,
+eliminando o erro de regime estacionário. 
+
+O delta alvo somado ao resultado do filtro produz um grau de incerteza nulo,
+e atualiza desta forma o valor do delta alvo, da tabela,
+assim, de forma adaptativa, 
+os valores de $\delta$ sempre estão sendo atualizados
+para variações que possam ocorrer no processo. 
+
+
+
+
+
+%A dificuldade aqui encontrada é no fato de que a atualização do
+%$\delta$ somente pode ocorrer após a estabilização do sinal no patamar
+%após a mudança de velocidade, seja em um primeiro momento de
+%acionamento com a velocidade saído do zero para um valor desejado de
+%referência, como entre valores desejados diferentes de zero e
+%diferentes entre si. 
 
 %Um temporizador é implementado de modo a 
 %gerar um primeiro intevalo de 3 segundos para 
@@ -1585,9 +1730,9 @@ diferentes entre si.
 %um incremento do fator de correção $\delta$ 
 %que está em operação é realizada. 
 
-Assim, de forma adaptativa, 
-os valores de $\delta$ sempre estão sendo atualizados
-para variações que possam ocorrer no processo. 
+%Assim, de forma adaptativa, 
+%os valores de $\delta$ sempre estão sendo atualizados
+%para variações que possam ocorrer no processo. 
 
 
 \newpage
