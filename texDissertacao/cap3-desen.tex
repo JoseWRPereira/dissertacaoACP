@@ -1201,13 +1201,14 @@ mas pode ser sinalizada e de alguma forma tratado pelo operador do sistema.
 
 
 
-\section{A região de incerteza (trivialidade) admitida }
+%\section{A região de incerteza (trivialidade) admitida }
+\section{A região de incerteza  admitida }
 
 Em torno da reta perfeitamente definida,
 eixo que denota o Grau de Certeza ($G_{ce}$),
 ou para a região em que o Grau de Incerteza é próximo a zero
 o suficiente para produzir um erro aceitável,
-a essa região é denominada de Região de Incerteza (Trivialidade) Admitida.
+a essa região é denominada de Região de Incerteza Admitida.
 
 Essa região é mostrada na Figura \ref{fig:zonaIncertezaAdmitida},
 podendo os limiares superior e inferior apresentar distâncias diferentes
@@ -1817,6 +1818,21 @@ mostrados na Figura \ref{fig:diagramaPereiraLeao}.
 \draw [thick] (5,9) -- (1,5);
 \draw [thick] (1,5) -- (5,1);
 \draw [thick] (5,1) -- (9,5);
+
+
+\node at (-2,6) {Região de Falsidade};
+\draw [->,thick] (-2,5.8) -- (1.3,5.1);
+\node at (-1,2) {Região de Incerteza Admitida};
+\draw [->,thick] (-1,2.2) -- (3.0,5);
+\node at (11,9) {Região de Incerteza Positiva};
+\draw [->,thick] (11,8.7) -- (6,7);
+\node at (11,1) {Região de Incerteza Negativa};
+\draw [->,thick] (11,1.3) -- (6,3);
+\node at (0,9.0) {Região de Máxima Inconsistência};
+\node at (0,8.4) {tendendo a falsidade positiva};
+\draw [->,thick] (0,8.0) -- (4,8);
+
+
 
 \end{tikzpicture}
 \label{fig:diagramaPereiraLeao}
