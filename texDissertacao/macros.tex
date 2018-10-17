@@ -110,65 +110,78 @@
 %%%------------------------------------ Ficha Catalográfica
 \newcommand{\fichacatalografica}
 {
-  \begin{titlepage}
-    \vfil\null
-    \vfill
-    \fbox
-    {
-      \begin{tabular}{p{14.0cm}}
-        P492c \ultimonome, \nome \\
-	\hspace{1cm} \begin{minipage}{0.8\textwidth}
-             \hspace{1cm} \titulo \subtitulo\ / \nome\ \ultimonome\ , - - \cidade , \ano .\\
-            \npaginas f. : il   					\\
-									\\
-	    \hspace{1cm} Orientador: \orientador . 			\\
-	    \hspace{1cm} \grau (\curso ) - - 				\\
-	    \hspace{1cm} \instituicao , \ano .				\\
-									\\
-            \areas . I. Leão, Tarcisio Fernandes. II. Título. 		\\
-									\\
-	    \begin{flushright}
-            \hfill CDD \CDU
-	    \end{flushright}
-        \end{minipage}
-      \end{tabular} 
-    }  
- \end{titlepage}
+
+\begin{figure}[!h]
+\vspace{13cm}
+\center\includegraphics[scale=0.6]{./imagens/fichaCatalog.png}
+\end{figure}
+
+
+%  \begin{titlepage}
+%    \vfil\null
+%    \vfill
+%    \fbox
+%    {
+%      \begin{tabular}{p{14.0cm}}
+%        P492c \ultimonome, \nome \\
+%	\hspace{1cm} \begin{minipage}{0.8\textwidth}
+%             \hspace{1cm} \titulo \subtitulo\ / \nome\ \ultimonome\ , - - \cidade , \ano .\\
+%            \npaginas f. : il   					\\
+%									\\
+%	    \hspace{1cm} Orientador: \orientador . 			\\
+%	    \hspace{1cm} \grau (\curso ) - - 				\\
+%	    \hspace{1cm} \instituicao , \ano .				\\
+%									\\
+%            \areas . I. Leão, Tarcisio Fernandes. II. Título. 		\\
+%									\\
+%	    \begin{flushright}
+%            \hfill CDD \CDU
+%	    \end{flushright}
+%        \end{minipage}
+%      \end{tabular} 
+%    }  
+% \end{titlepage}
 }
 %%%------------------------------------ Folha de Aprovação
 \newcommand{\folhadeaprovacao}
 {
-  \begin{titlepage}
-    \thispagestyle{empty}
-    \begin{center}
-      \textsc{\autor}
-      \vfill
-      \textsc{ \titulo } \\
-      \textsc{ \subtitulo }
-      \vfill
-    \end{center}
-    \natureza
-    \vfill
-    \centering Aprovado pela banca examinadora em \data \\
-    \vfill
-    \begin{center}
-      {\large\bfseries BANCA EXAMINADORA }\\
-      \vfill
-      \rule{9.0cm}{0.1mm} \\
-      {\torientador \orientador  }\\
-      {Orientador } \\
- %     \vfill
- %     \rule{9.0cm}{0.1mm} \\
- %     {\tcoorientador \coorientador} \\
- %     {Coorientador} \\
-      \vfill
-      \rule{9.0cm}{0.1mm} \\
-      {\texaminadorum \examinadorum }\\
-      \vfill
-      \rule{9.0cm}{0.1mm} \\
-      {\texaminadordois \examinadordois}
-    \end{center}
-  \end{titlepage}
+
+\begin{figure}[!h]
+\center\includegraphics[scale=1.05]{./imagens/ataJWRP.png}
+\end{figure}
+
+
+%  \begin{titlepage}
+%    \thispagestyle{empty}
+%    \begin{center}
+%      \textsc{\autor}
+%      \vfill
+%      \textsc{ \titulo } \\
+%      \textsc{ \subtitulo }
+%      \vfill
+%    \end{center}
+%    \natureza
+%    \vfill
+%    \centering Aprovado pela banca examinadora em \data \\
+%    \vfill
+%    \begin{center}
+%      {\large\bfseries BANCA EXAMINADORA }\\
+%      \vfill
+%      \rule{9.0cm}{0.1mm} \\
+%      {\torientador \orientador  }\\
+%      {Orientador } \\
+% %     \vfill
+% %     \rule{9.0cm}{0.1mm} \\
+% %     {\tcoorientador \coorientador} \\
+% %     {Coorientador} \\
+%      \vfill
+%      \rule{9.0cm}{0.1mm} \\
+%      {\texaminadorum \examinadorum }\\
+%      \vfill
+%      \rule{9.0cm}{0.1mm} \\
+%      {\texaminadordois \examinadordois}
+%    \end{center}
+%  \end{titlepage}
 }
 %%%------------------------------------ Dedicatória
 \newcommand{\dedicatoria}[1]
